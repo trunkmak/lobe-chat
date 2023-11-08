@@ -36,7 +36,7 @@ const ChatInputArea = forwardRef<InputRef, ChatInputAreaMobile>(
 
     return (
       <Flexbox className={cx(styles.container)} gap={12}>
-        <Action message={currentValue} />
+        <Action />
         <Flexbox className={styles.inner} gap={8} horizontal>
           <Input
             className={cx(styles.input)}

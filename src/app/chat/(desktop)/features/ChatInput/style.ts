@@ -1,29 +1,7 @@
 import { createStyles } from 'antd-style';
 
-export const useStyles = createStyles(({ css }) => {
+export const useStyles = createStyles(({ css, token }) => {
   return {
-    actionLeft: css`
-      display: flex;
-      flex: 1;
-      gap: 4px;
-      align-items: center;
-      justify-content: flex-start;
-    `,
-    actionsBar: css`
-      display: flex;
-      flex: none;
-      align-items: center;
-      justify-content: space-between;
-
-      padding: 0 16px;
-    `,
-    actionsRight: css`
-      display: flex;
-      flex: 0;
-      gap: 4px;
-      align-items: center;
-      justify-content: flex-end;
-    `,
     container: css`
       position: relative;
 
@@ -43,6 +21,9 @@ export const useStyles = createStyles(({ css }) => {
 
       padding: 0 24px;
     `,
+    hovering: css`
+      background: ${token.colorPrimaryBorder};
+    `,
     textarea: css`
       height: 100% !important;
       padding: 0 24px;
@@ -51,6 +32,7 @@ export const useStyles = createStyles(({ css }) => {
     textareaContainer: css`
       position: relative;
       flex: 1;
+      border: 1px solid red;
     `,
   };
 });

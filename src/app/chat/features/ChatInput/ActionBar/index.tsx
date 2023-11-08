@@ -38,11 +38,10 @@ const useStyles = createStyles(({ css }) => {
 });
 
 export interface ActionProps {
-  message: string;
   rightExtra?: ReactNode;
 }
 
-const ActionBar = memo<ActionProps>(({ message, rightExtra }) => {
+const ActionBar = memo<ActionProps>(({ rightExtra }) => {
   const { styles } = useStyles();
 
   const [showTokenTag] = useSessionStore((s) => [agentSelectors.showTokenTag(s)]);
@@ -53,7 +52,7 @@ const ActionBar = memo<ActionProps>(({ message, rightExtra }) => {
         <ActionLeft />
         {showTokenTag && (
           <Suspense>
-            <Token input={message} />
+            <Token />
           </Suspense>
         )}
       </div>
