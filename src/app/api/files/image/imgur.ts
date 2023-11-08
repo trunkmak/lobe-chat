@@ -6,7 +6,7 @@ interface UploadResponse {
   success: boolean;
 }
 
-export interface UploadData {
+interface UploadData {
   account_id: any;
   account_url: any;
   ad_type: any;
