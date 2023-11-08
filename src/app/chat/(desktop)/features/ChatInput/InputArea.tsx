@@ -1,6 +1,8 @@
-import { TextArea } from '@lobehub/ui';
+import { Icon, TextArea } from '@lobehub/ui';
+import { FileUpIcon } from 'lucide-react';
 import { memo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Center } from 'react-layout-kit';
 
 import { useSessionStore } from '@/store/session';
 
@@ -25,6 +27,12 @@ const InputArea = memo(() => {
   return (
     <div
       className={cx(styles.textareaContainer, isDragHovering && styles.hovering)}
+      /* eslint-disable react/jsx-sort-props */
+
+      // starting dragging
+      onDragOver={() => {
+        if (!isDragHovering) setDragHovering(true);
+      }}
       onDragEnd={() => {
         setDragHovering(false);
       }}
@@ -34,10 +42,17 @@ const InputArea = memo(() => {
       onDragLeave={() => {
         setDragHovering(false);
       }}
-      onDragOver={() => {
-        if (!isDragHovering) setDragHovering(true);
+      // success drop file to here
+      onDrop={() => {
+        setDragHovering(false);
       }}
+      /* eslint-enable */
     >
+      {isDragHovering && (
+        <Center className={styles.hoverContainer}>
+          <Icon icon={FileUpIcon} />
+        </Center>
+      )}
       <TextArea
         className={styles.textarea}
         onBlur={(e) => {
