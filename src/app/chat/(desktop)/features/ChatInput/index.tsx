@@ -3,15 +3,24 @@ import { memo, useState } from 'react';
 
 import { CHAT_TEXTAREA_HEIGHT, HEADER_HEIGHT } from '@/const/layoutTokens';
 import { useGlobalStore } from '@/store/global';
+import { useSessionStore } from '@/store/session';
 
-import ChatInputContent from '../../../features/ChatInputContent';
+import ChatInputArea from './Desktop';
 import Footer from './Footer';
 
 const ChatInputDesktopLayout = memo(() => {
   const [expand, setExpand] = useState<boolean>(false);
+  const [message, setMessage] = useState('');
+
   const [inputHeight, updatePreference] = useGlobalStore((s) => [
     s.preference.inputHeight,
     s.updatePreference,
+  ]);
+
+  const [isLoading, sendMessage, stopGenerateMessage] = useSessionStore((s) => [
+    !!s.chatLoadingId,
+    s.sendMessage,
+    s.stopGenerateMessage,
   ]);
 
   return (
@@ -30,7 +39,17 @@ const ChatInputDesktopLayout = memo(() => {
       size={{ height: inputHeight, width: '100%' }}
       style={{ zIndex: 10 }}
     >
-      <ChatInputContent expand={expand} footer={<Footer />} onExpandChange={setExpand} />
+      <ChatInputArea
+        expand={expand}
+        footer={<Footer />}
+        loading={isLoading}
+        minHeight={CHAT_TEXTAREA_HEIGHT}
+        onExpandChange={setExpand}
+        onInputChange={setMessage}
+        onSend={sendMessage}
+        onStop={stopGenerateMessage}
+        value={message}
+      />
     </DraggablePanel>
   );
 });

@@ -5,7 +5,7 @@ import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Flexbox } from 'react-layout-kit';
 
-import SaveTopic from '../../../features/ChatInputContent/Topic';
+import SaveTopic from '@/app/chat/features/ChatInput/Topic';
 
 const Footer = memo(() => {
   const theme = useTheme();
