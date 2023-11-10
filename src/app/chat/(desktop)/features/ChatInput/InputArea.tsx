@@ -1,8 +1,6 @@
-import { Icon, TextArea } from '@lobehub/ui';
-import { FileUpIcon } from 'lucide-react';
-import { memo, useRef, useState } from 'react';
+import { TextArea } from '@lobehub/ui';
+import { memo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Center } from 'react-layout-kit';
 
 import { useSessionStore } from '@/store/session';
 
@@ -11,7 +9,7 @@ import { useSendMessage } from './useSend';
 
 const InputArea = memo(() => {
   const { t } = useTranslation('common');
-  const [isDragHovering, setDragHovering] = useState(false);
+
   const isChineseInput = useRef(false);
 
   const { cx, styles } = useStyles();
@@ -25,34 +23,7 @@ const InputArea = memo(() => {
   const handleSend = useSendMessage();
 
   return (
-    <div
-      className={cx(styles.textareaContainer, isDragHovering && styles.hovering)}
-      /* eslint-disable react/jsx-sort-props */
-
-      // starting dragging
-      onDragOver={() => {
-        if (!isDragHovering) setDragHovering(true);
-      }}
-      onDragEnd={() => {
-        setDragHovering(false);
-      }}
-      onDragExit={() => {
-        setDragHovering(false);
-      }}
-      onDragLeave={() => {
-        setDragHovering(false);
-      }}
-      // success drop file to here
-      onDrop={() => {
-        setDragHovering(false);
-      }}
-      /* eslint-enable */
-    >
-      {isDragHovering && (
-        <Center className={styles.hoverContainer}>
-          <Icon icon={FileUpIcon} />
-        </Center>
-      )}
+    <div className={cx(styles.textareaContainer)}>
       <TextArea
         className={styles.textarea}
         onBlur={(e) => {
